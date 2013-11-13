@@ -30,8 +30,8 @@ apt-builder-build:
 			collectd-dummy_*.changes; \
 		mv collectd-dummy_* ..; \
 	else \
-		pushd src; \
+		cd src; \
 		debuild -e MAKEFLAGS=-j16 -i -us -uc -b; \
-		popd; \
+		cd ..; \
 		mv *.deb *.changes ..; \
 	fi
