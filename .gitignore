@@ -1,0 +1,6 @@
+collectd-*.tar.bz2
+collectd-build-deps_*.deb
+collectd_*.build
+debian/patched/
+debian/pkgconfig/
+src/
