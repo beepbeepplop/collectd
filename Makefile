@@ -19,5 +19,19 @@ apt-builder-deps:
 	# noop
 
 apt-builder-build:
-	cd src && debuild -e MAKEFLAGS=-j16 -i -us -uc -b
-	mv *.deb *.changes ..
+	set -e; \
+	release="`lsb_release -cs`"; \
+	if [ "$$release" = "lucid" ]; then \
+		rm -f collectd-dummy_*; \
+		equivs-build -f apt-builder.equivs || true; \
+		sed -i -e "/^Architecture:/s/ source\>//" \
+			-e "/\(\.tar\.gz\|\.dsc\)$$/d" \
+			-e "/^Distribution: /s/: .*/: $$release/" \
+			collectd-dummy_*.changes; \
+		mv collectd-dummy_* ..; \
+	else \
+		pushd src; \
+		debuild -e MAKEFLAGS=-j16 -i -us -uc -b; \
+		popd; \
+		mv *.deb *.changes ..; \
+	fi
