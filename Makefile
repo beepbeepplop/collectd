@@ -6,7 +6,7 @@ SHA256SUM=90973894a1f10775d409fe23ce7bc4d89c1b7c6f4d9918b305d160605871923e
 all: apt-builder-fetch apt-builder-build
 
 apt-builder-fetch: fetch-src
-	ln -nsf ../debian src/debian
+	cp -al debian src
 
 fetch-src:
 	wget -nc http://apt.shopify.com/dist/collectd/$(ARCHIVE)
