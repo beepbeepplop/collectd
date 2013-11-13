@@ -98,6 +98,9 @@ confflags += --disable-xmms
 # libkstat is required for the xfs_arc plugin.
 confflags += --disable-zfs-arc
 
+# libperl detection is broken.
+confflags += --disable-perl
+
 # These plugins are Linux-specific.
 ifneq (,$(filter kfreebsd-i386 kfreebsd-amd64, $(DEB_BUILD_ARCH)))
 	confflags += \
